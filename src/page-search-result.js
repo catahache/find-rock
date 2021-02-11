@@ -1,15 +1,10 @@
 import React, { Component } from "react";
+import logo from "./logo.svg";
 import "./App.css";
+import ArtistCard from "./components/artist-card";
 import "bootstrap/dist/css/bootstrap.css";
-import PageSearchResult from "./page-search-result";
-import PageHome from "./page-home";
-import PageArtist from "./page-artist";
-
-class App extends Component {
-    render() {
-        return <PageArtist></PageArtist>;
-    }
-}
+import SearchBar from "./components/search-bar";
+import SearchResult from "./components/search-result";
 
 // class App extends Component{}
 // function App() {
@@ -34,4 +29,25 @@ class App extends Component {
 //     );
 // }
 
-export default App;
+class PageSearchResult extends Component {
+    //levantar el estado
+    state = {
+        busqueda:"",
+    };
+
+    handleChange = e => {
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+    }
+    render() {
+        return (
+            <React.Fragment>
+                <SearchBar setValue={this.handleChange} searchResult={this.state.busqueda}></SearchBar>
+                <SearchResult searchResult={this.state.busqueda}></SearchResult>
+            </React.Fragment>
+        );
+    }
+}
+
+export default PageSearchResult;
